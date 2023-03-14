@@ -1,8 +1,23 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const UserPage = () => {
   return (
-    <div>UserPage</div>
+    <div>
+      <header>
+        
+      </header>
+
+      <div>
+
+      </div>
+
+
+
+      <footer>
+
+      </footer>
+    </div>
   )
 }
 
