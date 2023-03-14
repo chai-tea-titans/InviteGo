@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(null);
 
   const weekdaysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const months = [
@@ -34,10 +33,6 @@ const Calendar = () => {
   const monthName = months[currentDate.getMonth()];
   const year = currentDate.getFullYear();
 
-  const onDateClick = day => {
-    setSelectedDate(day);
-  };
-
   const renderCalendarCells = () => {
     const calendarCells = [];
     let day = 1;
@@ -55,15 +50,21 @@ const Calendar = () => {
         } else if (day > daysInMonth) {
           break;
         } else {
+          const dayValue = j - startingDay + 1;
           calendarRow.push(
-            <td
-              key={`${i}-${j}`}
-              className={`calendar-cell ${
-                day === selectedDate ? "selected" : ""
-              }`}
-              onClick={() => onDateClick(day)}
-            >
-              {day}
+            <td key={`${i}-${j}`}>
+              <button
+                onClick={() => {
+                  const currentDate = new Date();
+                  const currentYear = currentDate.getFullYear();
+                  const dayOfMonth = i * 7 + j + 1 - startingDay;
+                  console.log(
+                    `Clicked on day ${dayOfMonth} of ${monthName}, ${currentYear}`
+                  );
+                }}
+              >
+                {day}
+              </button>
             </td>
           );
           day++;
