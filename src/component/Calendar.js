@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import DisplaytickerNote from "./DisplayStickerNote";
 
 const Calendar = () => {
-  const [showingNote, setShowingNote] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentYear] = useState(new Date().getFullYear());
   const [showNote, setShowNote] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [createNote, setCreateNote] = useState("");
 
   const weekdaysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const months = [
