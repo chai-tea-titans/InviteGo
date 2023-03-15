@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-const PopUpStickerNote = ({
+const DisplaytickerNote = ({
   dayOfMonth,
   monthName,
   currentYear,
@@ -33,4 +33,4 @@ const PopUpStickerNote = ({
   );
 };
 
-export default PopUpStickerNote;
+export default DisplaytickerNote;

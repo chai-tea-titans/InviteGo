@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import PopUpStickerNote from "./PopUpStickerNote";
+import DisplaytickerNote from "./DisplayStickerNote";
 
 const Calendar = () => {
+  const [showingNote, setShowingNote] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [showNote, setShowNote] = useState(false);
@@ -82,7 +83,7 @@ const Calendar = () => {
                     note.currentYear === currentYear
                 )
                 .map(note => (
-                  <PopUpStickerNote
+                  <DisplaytickerNote
                     key={`${day}-${monthName}-${currentYear}`}
                     dayOfMonth={note.dayOfMonth}
                     monthName={note.monthName}
