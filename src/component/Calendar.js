@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import DisplaytickerNote from "./DisplayStickerNote";
 
 const Calendar = () => {
+  const [showingNote, setShowingNote] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [showNote, setShowNote] = useState(false);
+  const [notes, setNotes] = useState([]);
 
   const weekdaysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const months = [
@@ -50,7 +55,6 @@ const Calendar = () => {
         } else if (day > daysInMonth) {
           break;
         } else {
-          const dayValue = j - startingDay + 1;
           calendarRow.push(
             <td key={`${i}-${j}`}>
               <button
@@ -61,10 +65,36 @@ const Calendar = () => {
                   console.log(
                     `Clicked on day ${dayOfMonth} of ${monthName}, ${currentYear}`
                   );
+                  setNotes(prevNotes => [
+                    ...prevNotes,
+                    { dayOfMonth, monthName, currentYear },
+                  ]);
+
+                  setShowNote(true);
                 }}
               >
                 {day}
               </button>
+              {notes
+                .filter(
+                  note =>
+                    note.dayOfMonth === day &&
+                    note.monthName === monthName &&
+                    note.currentYear === currentYear
+                )
+                .map(note => (
+                  <DisplaytickerNote
+                    key={`${day}-${monthName}-${currentYear}`}
+                    dayOfMonth={note.dayOfMonth}
+                    monthName={note.monthName}
+                    currentYear={note.currentYear}
+                    onClose={() =>
+                      setNotes(prevNotes =>
+                        prevNotes.filter(prevNote => prevNote !== note)
+                      )
+                    }
+                  />
+                ))}
             </td>
           );
           day++;
